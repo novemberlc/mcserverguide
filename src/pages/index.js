@@ -1,43 +1,40 @@
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
-import Heading from '@theme/Heading';
-import styles from './index.module.css';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
-    </Layout>
-  );
+    return (
+        <Layout
+            title={`Home`}
+            description="Simple guides for everyone">
+            <main>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+                    <div style={{ textAlign: 'center', maxWidth: '500px', width: '80%' }}>
+                        <h1>Welcome to NCMS Guides</h1>
+                        <div style={{ borderBottom: '2px solid', margin: '20px auto', maxWidth: '300px' }}></div>
+                        <p3>This is a simple, open-source website dedicated to providing people with easy-to-understand how-to guides.</p3>
+                        <p3>Have something to contribute? <Link to="https://github.com/NCMSStudios/NCMSGuides">Please do!</Link> We want to enable people to learn, and sharing knowledge is the best way to do that.</p3>
+                        <div>
+                            <a href="/main">
+                                <button style={{
+                                    marginTop: '20px',
+                                    display: 'ruby',
+                                    padding: '10px 20px',
+                                    fontSize: '16px',
+                                    border: '2px solid',
+                                    borderRadius: '10px',
+                                    backgroundColor: 'transparent',
+                                    cursor: 'pointer',
+                                    color: 'inherit',
+                                    transition: 'scale 0.3s',
+                                    '&:hover': {
+                                        transform: 'scale(1.05)' // Scale up by 5% on hover
+                                      }
+                                }}>Go to the guide!</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </Layout >
+    );
 }

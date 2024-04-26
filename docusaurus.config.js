@@ -13,10 +13,11 @@ const config = {
   favicon: 'img/icon_v2_crop.png',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://guides.ncmsstudios.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
+  trailingSlash: false,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -68,10 +69,14 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'mainSidebar',
+            href: '/about',
             position: 'left',
-            label: 'Guides',
+            label: 'About',
+          },
+          {
+            href: 'https://ncmsstudios.com',
+            position: 'right',
+            label: 'Main Site',
           },
           {
             href: 'https://github.com/NCMSStudios/NCMSGuides',
@@ -82,49 +87,31 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
+            label: 'Discord',
+            href: 'https://discord.gg/D7YaejmyUG',
+          },          
+          {
+            label: 'YouTube',
+            href: 'https://www.youtube.com/@NCMSStudios',
+          },          
+          {
+            label: 'Twitch',
+            href: 'https://www.twitch.tv/ncmsstudios',
           },
           {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
+            label: 'Twitter / X',
+            href: 'https://twitter.com/NCMSStudios',
           },
           {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
+            label: 'Instagram',
+            href: 'https://instagram.com/ncmsstudios',
           },
+
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} novemberlc`,
       },
       prism: {
         theme: prismThemes.github,
