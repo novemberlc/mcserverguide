@@ -69,6 +69,11 @@ const config = {
         },
         items: [
           {
+            href: '/main',
+            position: 'left',
+            label: 'The Guide',
+          },
+          {
             href: '/about',
             position: 'left',
             label: 'About',
