@@ -8,13 +8,19 @@ sidebar_position: 1
 
 If you're hosting a Minecraft server at home, chances are you don't want to expose your home IP. One way to hide it is through a proxy. Setting one up can be a bit tricky though, so if you don't want to do that, I've included some [alternatives](#alternatives), too.
 
+:::danger
+
+This guide is incomplete. If you know what you're doing, please only use this guide for reference in this state.
+
+:::
+
 ### How it works
 
 Broadly, a proxy forwards traffic between two or more computers. In this case, the proxy is a server that will live on a VPS outside of your network and forward traffic between the Minecraft server and the clients. Only the proxy knows where the server is, which is how it hides your IP address. Clients connect to the proxy, which then forwards the data on to the server, optionally through a VPN for extra security.
 
 ### What you'll need
 
-- A Spigot/Paper or Fabric server running somewhere in your network
+- A Spigot/Paper or Fabric server running somewhere in your network, port forwarded, and ready to go
 - A domain name (optional, but strongly recommended)
 - A cloud server (VPS)
 - A bit of Linux command-line knowledge
@@ -137,11 +143,11 @@ The proxy is now running inside a screen session. To leave the session, type 'Ct
 
 ### Step 4: Connecting Velocity to your Minecraft server
 
-Reconnect to the screen session, stop your proxy, and then detach from the session. Edit the velocity config, velocity.toml.
+Reconnect to the screen session, stop your proxy, and then detach from the session. Edit the velocity config, **velocity.toml**.
 ```
 nano velocity.toml
 ```
-Where it says `bind = "0.0.0.0:25567"`, change it to say `bind = "0.0.0.0:25565"`.
+Where it says `bind = "0.0.0.0:25567"`, change it to `bind = "0.0.0.0:25565"`. Set `player-info-forwarding-mode = "modern"`. Under `[servers]`, replace the default servers with `main = "<homeip>:25567"`, swapping \<homeip\> with the public IP of your Minecraft server. Below that, in `try = [ ]`, set it to `"main"`. Finally, under `[forced-hosts]`, set it to `"<subdomain>.example.com" = [ "main" ]`, swapping \<subdomain\> for your subdomain if you're using one. See the sample below for formatting.
 
 <details>
   <summary>Sample velocity.toml file</summary>
@@ -151,7 +157,7 @@ Where it says `bind = "0.0.0.0:25567"`, change it to say `bind = "0.0.0.0:25565"
 config-version = "2.7"
 
 # What port should the proxy be bound to? By default, we'll bind to all addresses on port 25577.
-bind = "0.0.0.0:25577"
+bind = "0.0.0.0:25565"
 
 # What should be the MOTD? This gets displayed when the player adds your server to
 # their server list. Only MiniMessage format is accepted.
@@ -302,6 +308,30 @@ show-plugins = false
 
 </details>
 
+Now you need to configure your server. Stop your server and then edit the **server.properties** file. Change `server-port` to equal `25567` and `online-mode` to equal `false`.
+
+```properties title="server.properties"
+online-mode=false
+server-port=25568
+```
+
+:::tip important
+
+Since your server is now running on port 25567, make sure to port forward that instead of 25565. If possible, for added security, restrict it in your firewall configuration to only accept connections from your proxy's IP.
+
+:::
+
+Save **server.properties**. Now edit **config/paper-global.yml**. Under Proxies, then under Velocity, set `enabled: true`, `online-mode-true`, and `secret: <secret>`. You can find the secret in the **forwarding.secret** file on your proxy server.
+
+```yml title="paper-global.yml"
+  velocity:
+    enabled: true
+    online-mode: true
+    secret: <secret>
+```
+
+Save **paper-global.yml**. Start your server and the proxy, and you should be good to go! Either connect to your server using your proxy's ip, or follow the next step to add a domain!
+
 ### Step 5: Connecting a domain
 
 There are two methods you can use to point a domain to your proxy. In most cases, you can just use an A record, since the proxy should be running on port 25565, the default minecraft port. If it's not, though, you can use an SRV record.
@@ -317,11 +347,21 @@ Using an SRV record is a bit more complicated, and you should only need it if yo
 1. Create an A record that points to the proxy.
 2. Create an SRV record that targets the address you set up with the A record. The name of the SRV record should be something like `_minecraft._tcp.<subdomain>`. The port will be the port your proxy is accepting connections on.
 
-## Optional steps: VPN tunneling (Recommended)
+## Optional step: VPN tunneling (Recommended)
 
 To add more security to your setup, you can encrypt the backend connection between your proxy and Minecraft server. This helps prevent people from trying to connect directly to the server without going through the proxy. This isn't a huge deal, since Velocity uses a secret to only allow proxy traffic, but it's good practice.
 
-### Optional Step 1:
+To secure the backend, we'll use WireGuard, a free, fast, and open source VPN service.
+
+:::info
+
+This section is incomplete. Here is a good guide from DigitalOcean describing how to set WireGuard up on Debian 11, but it will work on Debian 12 as well. https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-debian-11
+
+You should be able to skip steps 4 and 5 in that guide since you're only going to tunnel some of the traffic. You also probably don't have to worry about IPv6.
+
+If you set up the VPN, note that instead of setting your public IP in your **velocity.toml**, you'll set the IP of your server through your VPN. If you followed the guide above, that'll likely be 10.8.0.1 for you if you have the Minecraft server set up as the VPN server and the proxy set up as the client.
+
+:::
 
 ## Alternatives
 
