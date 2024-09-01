@@ -1,0 +1,175 @@
+---
+id: setting-up
+title: Setting Up
+sidebar_position: 3
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+For this beginner's guide, we'll assume you've chosen to run your server on your own hardware. Let's set things up!
+
+## Download the server
+
+Some of the setup is a bit different between Windows and Linux. Use the tabs that correspond to your operating system and server software.
+
+
+<Tabs groupId="operating-systems">
+  <TabItem value="windows" label="Windows" default>
+    <Tabs groupId="software">
+        <TabItem value="vanilla" label="Vanilla" default>
+
+            1. Download Java 22 for Windows, if not already installed: https://www.oracle.com/java/technologies/downloads/#jdk22-windows
+            2. Head to the official server download page (https://www.minecraft.net/en-us/download/server) and download the server jar to an empty folder, preferably somewhere outside of your Downloads folder.
+
+        </TabItem>
+        <TabItem value="fabric" label="Fabric">
+
+            1. Download Java 22 for Windows, if not already installed: https://www.oracle.com/java/technologies/downloads/#jdk22-windows
+            2. Head to the Fabric server download page (https://fabricmc.net/use/server/) and download the server jar to an empty folder, preferably somewhere outside of your Downloads folder.
+
+        </TabItem>
+        <TabItem value="paper" label="Paper">
+
+            1. Download Java 22 for Windows, if not already installed: https://www.oracle.com/java/technologies/downloads/#jdk22-windows
+            2. Head to the Paper server download page (https://papermc.io/downloads/paper) and download the server jar to an empty folder, preferably somewhere outside of your Downloads folder.
+
+        </TabItem>
+    </Tabs>
+  </TabItem>
+  <TabItem value="linux" label="Debian/Ubuntu">
+        <Tabs groupId="software">
+        <TabItem value="vanilla" label="Vanilla" default>
+
+            1. Download Java 22 for Linux, if not already installed 
+            
+                ```linuxCmd showLineNumbers
+                sudo apt install openjdk-22-jdk
+                ```
+
+            2. Head to the official server download page (https://www.minecraft.net/en-us/download/server) and copy the download link.
+
+        </TabItem>
+        <TabItem value="fabric" label="Fabric">
+
+            1. Download Java 22 for Linux, if not already installed 
+            
+                ```linuxCmd showLineNumbers
+                sudo apt install openjdk-22-jdk
+                ```
+
+            2. Head to the Fabric server download page (https://papermc.io/downloads/paper) and copy the download link.
+
+        </TabItem>
+        <TabItem value="paper" label="Paper">
+
+            1. Download Java 22 for Linux, if not already installed 
+            
+                ```linuxCmd showLineNumbers
+                sudo apt install openjdk-22-jdk
+                ```
+
+            2. Head to the Paper server download page (https://fabricmc.net/use/server/) and copy the download link.
+            
+        </TabItem>
+    </Tabs>
+
+            3. Create a new directory for the server 
+            
+                ```linuxCmd showLineNumbers
+                mkdir <directory name>
+                ```
+            
+                then enter it
+            
+                ```linuxCmd showLineNumbers
+                cd <directory name>
+                ```
+
+            4. Download the server jar into that directory 
+            
+                ```linuxCmd showLineNumbers
+                wget <download link you copied>
+                ```
+
+  </TabItem>
+</Tabs>
+
+## Start the server
+
+<Tabs groupId="operating-systems">
+  <TabItem value="windows" label="Windows" default>
+
+            1. Open the folder you downloaded the jar into. Hold `Shift` and right click in an empty area. Click "Open in Terminal" or "Open Command Window Here."
+            2. Start the server. Make sure the filename matches the one you downloaded.
+            
+                ```winCmd showLineNumbers
+                java -Xmx1024M -Xms1024M -jar <filename>.jar nogui
+                ```
+
+                *Note:* The `-Xms` flag sets how much ram Java will allocate to your server. `-Xmx` sets the maximum ram it can use. Set these according to your hardware availability.
+
+            3. You'll get an error saying that you havent agreed to the EULA. Press `Ctrl+C` to stop the server, then go back to your server folder. Edit `eula.txt` and change `false` to `true`. Save the file and start your server again.
+
+  </TabItem>
+  <TabItem value="linux" label="Debian/Ubuntu">
+
+            1. Start the server. Make sure the filename matches the one you downloaded.
+
+                ```linuxCmd showLineNumbers
+                java -Xmx1024M -Xms1024M -jar <filename>.jar nogui
+                ```
+                
+                *Note:* The `-Xms` flag sets how much ram Java will allocate to your server. `-Xmx` sets the maximum ram it can use. Set these according to your hardware availability.
+
+            2. You'll get an error saying that you havent agreed to the EULA. Press `Ctrl+C` to stop the server.
+            3. Edit `eula.txt`
+
+                ```linuxCmd showLineNumbers
+                nano eula.txt
+                ```
+
+            4. Save the file with `Ctrl+X` then `y` then `Enter` and start your server again.
+
+  </TabItem>
+</Tabs>
+
+You should now be able to connect locally. Test your connection by connecting to your server's **local** IP address in Minecraft.
+
+## Letting others join
+
+If you're able to connect locally, great! Now we're going to allow people on the internet to join your server.
+
+To allow people to join your server, you can use something called **port forwarding**. Ports are where the network traffic for a given program enter and exit, and there are 65,535 of them. It's almost like if your house had 65,535 mailboxes, with a different service dedicated to each one (some services use multiple ports, too). These mailboxes belong to your router, which sends the mail on to the rooms it needs to go to. Most web traffic, which communicates over HTTPS, uses port 443. Minecraft communicates on port 25565 by default.
+
+Imagine that not only does your house have 65,535 mailboxes, but each room in your house does, too. Much like your router accepts traffic on ports, so does each device in your network. Normally, your router sends the traffic where it needs to go between itself and the devices on your network though something called NAT, although we won't get into that.
+
+Port forwarding is like taking one of your room's mailboxes and connecting it directly to the house's mailbox. It allows devices on the internet to communicate over that port just like they would if they were in your house. Sounds kind of scary, right? It can be, but depending on how you set it up, you can reduce the risk greatly.
+
+#### How to port forward
+
+The process varies between router brands, but in general you'll navigate to your router's local IP address in your browser, usually `192.168.1.1` or `10.0.0.1`. Once you do that, log in, and then find the port forwarding section.
+
+You'll want to forward port 25565 of your local server, so you'll need its IP address. If you're on Windows, you can find this out by opening a command prompt and typing `ipconfig`. You should see your network adapter show up, and under it, a line saying "IPv4 Address". That's your server's local IP. On Linux, the process is similar, but the command is `ifconfig`.
+
+Once you forward the port, your friends should be able to join! All they have to do is type your **public** IP address into the Minecraft address bar, and they should be able to connect. If you don't know your public IP, assuming you're on the same network as your server, just search "what's my ip" on Google. Or you can go [here](https://icanhazip.com/).
+
+<details>
+  <summary>Troubleshooting</summary>
+
+    #### Can't connect to the server locally
+    If you can't connect to your Minecraft server locally and you're on Windows, check the Windows firewall settings to make sure it's set to private. This will allow it to directly connect to other devices on your network. **Only do this if you're on a private network!**
+
+    #### Others can't join, even after port forwarding
+    1. Make sure you're using the correct local IP and port
+    2. Make sure you're actually able to port forward
+
+</details>
+
+## Next steps
+
+You now have a working Minecraft server! If it's just a server to play with your friends, a basic server like this might work just fine for you. Just enable the whitelist, and you're good to go!
+
+If you want a more detailed guide for server configuration and administration, see here.
+
+If you want to secure your server or hide your IP address behind a proxy, move on to the "Security" section.

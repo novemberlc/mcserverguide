@@ -1,0 +1,82 @@
+---
+id: decisions
+title: Decisions
+sidebar_position: 2
+---
+
+Before you get started on making your server, you have a few decisions to make: where you'll host the server, what operating system you'll use, and which server software to run.
+
+## Deciding how to host
+
+There are many options for hosting a Minecraft server. While later sections of this guide can help with all of these methods, the "Your First Server" section will teach you about Option 3: self-hosting at home.
+
+#### **Option 1: Paying for a host**
+
+The easiest solution is to pay for a Minecraft hosting provider. Setup for those varies widely between providers, so we won't cover that here. If you go that route, we have some configuration guides that apply to all servers, regardless of where they're hosted.
+
+#### **Option 2: Self-hosting in the cloud or on a VPS**
+
+This option can be very expensive, depending on how powerful/complicated your Minecraft server/network is. I would only recommend this option to people who are experienced in server hosting and Linux, and have the money to spare.
+
+#### **Option 3: Self-hosting at home!**
+
+The "Your First Server" section will cover how to run a basic Mincraft server on a spare computer in your house. This can be a laptop, a PC, or even a Raspberry Pi.
+
+:::warning
+
+You will need to port forward for this method. Before you proceed, make sure you're able to port forward. The process varies from router to router, so look up how to do it for yours.
+
+<details>
+  <summary>If you can't port forward</summary>
+
+    If you can't port forward, your ISP may have you behind something called [CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT). You can still get around this by using something like [playit.gg](https://playit.gg), which proxies your traffic through their service.
+
+</details>
+
+:::
+
+## The hardware
+
+Small Minecraft servers for just a few players can run on just about anything. Basically, anything with 4 or more cores, as well as a reasonable clockspeed (~2.5 GHz minimum) will suffice. Make sure you have enough ram, too. 6 gigabytes should be enough for a small server. Look up your hardware to see if anyone else has had any success running a Minecraft server on it.
+
+## The operating system
+
+You can run Windows, Linux, or, if you're advanced and have hardware that can handle it, a hypervisor to run Linux on top of, but we won't cover that.
+
+#### Windows
+
+This may be the easiest option for people who have never used Linux and don't want to learn it. Likely, the hardware you are using is already running Windows, and it'll work if you want to get a server up and running quickly for some friends. We'll assume you have a GUI for this guide. If you want better reliability, or you want to host a server for the public, I would recommend Linux.
+
+#### Linux (Debian or Ubuntu)
+
+If you're familiar with Linux (or even if you're not, and you're willing to learn!), it can be a simple, lightweight, reliable backbone for your Minecraft server.
+
+We'll cover both Linux and Windows in the guide.
+
+## Server software
+
+You have a few options when it comes to server software.
+
+#### Vanilla
+
+One option is to use the [official Minecraft server JAR](https://www.minecraft.net/en-us/download/server). It contains only the basic, official Minecraft server functionality, and it isn't really expandable. This could be a good option if you strictly want to play vanilla Minecraft with a few people.
+
+#### Paper
+
+[Paper](https://papermc.io/), a fork of Spigot, the most popular server software, is a great option. It's widely supported, has many plugins available, and can accommodate many players without much issue. Paper is pretty much the standard these days.
+
+#### Fabric
+
+You may be familiar with Fabric as a way to modify your client. There's also a server-side component, which is the [Fabric server](https://fabricmc.net/use/server/). This is a great option if you think you might want to mod your game on the latest version.
+
+:::info[Note for technical Minecrafters and SMP owners]
+Because of optimizations to patch exploits and improve performance with a large playerbase, Spigot, and especially Paper, break some redstone and other vanilla mechanics. Most players won't notice a difference, but it's possible, so take that into consideration as you're deciding which software to run. If you want to keep vanilla mechanics, but still have options to configure the server, you can use Fabric with server-side mods. cubicmetre, a technical redstone YouTuber, has a good [video](https://www.youtube.com/watch?v=XjjXYrMK4qw) on the topic, if you're interested.
+:::
+
+#### Other options
+
+- [Spigot](https://www.spigotmc.org/): There's not much reason to run Spigot on its own these days, but if you have a specific need, it's available.
+- [Purpur](https://purpurmc.org/): Purpur is a descendant of Paper that allows for more customizability.
+- [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/): For legacy modpacks, you might need a Forge server.
+
+Once you've chosen your server software, proceed to setting up!

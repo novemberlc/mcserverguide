@@ -1,0 +1,19 @@
+---
+id: best-practices
+title: Best Practices
+sidebar_position: 1
+---
+
+There are a few things you should consider when securing your Minecraft server, especially if you host it at home. Not all of these will be possible depending on your network configuration, but do as many as you can. Some of these help to protect the Minecraft server, while others help protect your infrastructure from it if it's compromised. You can't be too careful when random people on the internet are connecting to your server.
+
+## Virtualization and Docker
+
+One of the most effective ways to secure your Minecraft server is to virtualize it, whether that be on a VM running on a hypervisor or a Docker container.
+
+## Client isolation
+
+If possible, isolate your server hardware on its own VLAN in your network, and only allow it to connect to the internet. That way, if your server is compromised, the rest of your local network will be safer.
+
+## Proxy
+
+We have a guide on how to set up a Velocity proxy and VPN to hide your IP address and make recovering from DoS attacks easier. You can find that [here](/security/velocity-proxy).
