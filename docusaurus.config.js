@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/Book_JE2_BE2.png',
 
   // Set the production url of your site here
-  url: 'https://guides.ncmsstudios.com',
+  url: 'https://mcguide.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -21,8 +21,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'NCMSStudios', // Usually your GitHub org/user name.
-  projectName: 'NCMSGuides', // Usually your repo name.
+  organizationName: 'novemberlc', // Usually your GitHub org/user name.
+  projectName: 'mcserverguide', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -46,7 +46,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/NCMSStudios/NCMSGuides/tree/main/',
+            'https://github.com/novemberlc/mcserverguide/tree/main/',
           showLastUpdateTime: true,
         },
         blog: false,
@@ -97,29 +97,6 @@ const config = {
       },
       footer: {
         style: 'light',
-        /*links: [
-          {
-            label: 'Discord',
-            href: 'https://discord.gg/D7YaejmyUG',
-          },          
-          {
-            label: 'YouTube',
-            href: 'https://www.youtube.com/@NCMSStudios',
-          },          
-          {
-            label: 'Twitch',
-            href: 'https://www.twitch.tv/ncmsstudios',
-          },
-          {
-            label: 'Twitter / X',
-            href: 'https://twitter.com/NCMSStudios',
-          },
-          {
-            label: 'Instagram',
-            href: 'https://instagram.com/ncmsstudios',
-          },
-
-        ],*/
         copyright: `Copyright © ${new Date().getFullYear()} novemberlc`,
       },
       prism: {
