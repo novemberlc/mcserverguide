@@ -1,7 +1,7 @@
 ---
 id: main
-title: NCMS Guides
+title: MC Server Guide
 sidebar_position: 1
 ---
 
-Welcome to NCMS Guides! Choose a category on the left to get started.
+Welcome to the MC Server Guide! Choose a category on the left to get started.

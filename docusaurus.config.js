@@ -8,9 +8,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'NCMS Guides',
+  title: 'MC Server Guide',
   tagline: 'Guides to help you do things',
-  favicon: 'img/icon_v2_crop.png',
+  favicon: 'img/Book_JE2_BE2.png',
 
   // Set the production url of your site here
   url: 'https://guides.ncmsstudios.com',
@@ -47,6 +47,7 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/NCMSStudios/NCMSGuides/tree/main/',
+          showLastUpdateTime: true,
         },
         blog: false,
         theme: {
@@ -59,13 +60,21 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'beta_warning',
+        content:
+          'Notice: This guide is a work in progress! Information may be incomplete, so proceed with caution.',
+        backgroundColor: '#f52020',
+        textColor: '#eeeeee',
+        isCloseable: false,
+      },
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'NCMS Guides',
+        title: 'MC Server Guide',
         logo: {
-          alt: 'NCMS Guides Logo',
-          src: 'img/icon_v2_crop.png',
+          alt: 'MC Server Guide Icon',
+          src: 'img/Book_JE2_BE2.png',
         },
         items: [
           {
@@ -79,12 +88,7 @@ const config = {
             label: 'About',
           },
           {
-            href: 'https://ncmsstudios.com',
-            position: 'right',
-            label: 'Main Site',
-          },
-          {
-            href: 'https://github.com/NCMSStudios/NCMSGuides',
+            href: 'https://github.com/novemberlc/mcserverguide',
             position: 'right',
             className: "header-github-link",
             "aria-label": "GitHub repository",
@@ -93,7 +97,7 @@ const config = {
       },
       footer: {
         style: 'light',
-        links: [
+        /*links: [
           {
             label: 'Discord',
             href: 'https://discord.gg/D7YaejmyUG',
@@ -115,13 +119,13 @@ const config = {
             href: 'https://instagram.com/ncmsstudios',
           },
 
-        ],
+        ],*/
         copyright: `Copyright © ${new Date().getFullYear()} novemberlc`,
       },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['toml', 'properties'],
+        additionalLanguages: ['toml', 'properties', 'bash'],
       },
     }),
 };
