@@ -64,7 +64,7 @@ const config = {
         id: 'beta_warning',
         content:
           'Notice: This guide is a work in progress! Information may be incomplete, so proceed with caution.',
-        backgroundColor: '#f52020',
+        backgroundColor: '#FA6C6C',
         textColor: '#eeeeee',
         isCloseable: false,
       },
