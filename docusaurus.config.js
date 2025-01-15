@@ -97,7 +97,7 @@ const config = {
       },
       footer: {
         style: 'light',
-        copyright: `Copyright © ${new Date().getFullYear()} novemberlc and contributors`,
+        copyright: `Copyright © 2025 novemberlc and contributors`,
       },
       prism: {
         theme: prismThemes.github,
