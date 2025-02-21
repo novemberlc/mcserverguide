@@ -20,3 +20,8 @@ Please test your build locally before contributing:
 6. CD into the new website folder
 7. Run `npm install` to install packages if necessary
 8. Run `npm start` to run the development server
+
+## License
+The content on this website is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) license. The source code for the website itself, used to display the content, is licensed in part under the [MIT license](https://github.com/facebook/docusaurus/blob/main/LICENSE).
+
+Copyright © 2024-2025 MC Server Guide contributors. Some rights reserved.
