@@ -97,7 +97,7 @@ const config = {
       },
       footer: {
         style: 'light',
-        copyright: `Copyright © 2024-2025 MC Server Guides contributors`,
+        copyright: `Copyright © 2024-2025 MC Server Guide contributors`,
       },
       prism: {
         theme: prismThemes.github,
