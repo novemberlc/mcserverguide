@@ -2,7 +2,7 @@
 
 I absolutely love open-source projects and knowledge, and I want to share information with everyone to make things easier. If that also sounds like you, please contribute!
 
-# About the project
+## About the project
 
 The MC Server Guide is a simple [Docusaurus](https://docusaurus.io/) site. We're open to contributions from everyone! If you just want to view the website, it's live at https://mcguide.org. Check it out!
 
