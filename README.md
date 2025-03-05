@@ -8,7 +8,7 @@ The MC Server Guide is a simple [Docusaurus](https://docusaurus.io/) site. We're
 
 ### Contributing
 
-To contribute, please open an issue first. Describe what you would like to add or change. For simple changes, we can probably just make the change, but for larger things, if we would like to include it, we'll have you open a pull request to add your feature/guide.
+For small changes, such as fixing grammatical issues, open a pull request and we'll merge your change. For larger changes, such as adding a guide, please open an issue first to describe what you would like to add or change. If we would like to include it, we'll have you open a pull request to add your feature/guide.
 
 Please test your build locally before contributing:
 
@@ -17,7 +17,7 @@ Please test your build locally before contributing:
 3. Name it what you want, then select the second option: Git repository
 4. Provide it with the repository URL
 5. Create a deep or shallow clone
-6. CD into the new website folder
+6. `CD` into the new website folder
 7. Run `npm install` to install packages if necessary
 8. Run `npm start` to run the development server
 
