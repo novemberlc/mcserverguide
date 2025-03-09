@@ -1,3 +1,5 @@
+![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fmcguide.org&link=https%3A%2F%2Fmcguide.org)
+
 # Welcome to the MC Server Guide repo!
 
 I absolutely love open-source projects and knowledge, and I want to share information with everyone to make things easier. If that also sounds like you, please contribute!
