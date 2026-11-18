@@ -97,12 +97,12 @@ const config = {
       },
       footer: {
         style: 'light',
-        copyright: `Copyright © 2024-2025 MC Server Guide contributors`,
+        copyright: `Copyright © 2024-2026 MC Server Guide contributors`,
       },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['toml', 'properties', 'bash'],
+        additionalLanguages: ['toml', 'properties', 'bash', 'ini'],
       },
     }),
 };

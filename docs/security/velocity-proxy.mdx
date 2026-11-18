@@ -345,17 +345,106 @@ Using an SRV record is a bit more complicated, and you should only need it if yo
 
 To add more security to your setup, you can encrypt the backend connection between your proxy and Minecraft server. This helps prevent people from trying to connect directly to the server without going through the proxy. This isn't a huge deal, since Velocity uses a secret to only allow proxy traffic, but it's good practice.
 
+The main benefits to using a VPN are that you don't have to port foward your Minecraft sever host, it works behind CGNAT, and if your home IP changes, it'll automatically handle it.
+
 To secure the backend, we'll use WireGuard, a free, fast, and open source VPN.
 
 :::info
 
-This section is incomplete. Here is a good guide from DigitalOcean describing how to set WireGuard up on Debian 11, but it will work on Debian 12 as well:   https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-debian-11
+This section should work fine, but if you want more information on the setup, here is a good guide from DigitalOcean describing how to set WireGuard up on Debian 11, but it will work on Debian 12 and 13 as well:   https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-debian-11
 
 You should be able to skip steps 4 and 5 in that guide since you're only going to tunnel some of the traffic. You also probably don't have to worry about IPv6.
 
-If you set up the VPN, note that instead of setting your public IP in your **velocity.toml**, you'll set the IP of your server through your VPN. If you followed the guide above, that'll likely be 10.8.0.1 for you if you have the Minecraft server set up as the VPN server and the proxy set up as the client.
+If you set up the VPN, note that instead of setting your public IP in your **velocity.toml**, you'll set the IP of your server through your VPN.
 
 :::
+
+### Step 1: Installing WireGuard
+
+On both the VPS and your Minecraft server host, install WireGuard.
+
+```linuxCmd showLineNumbers
+sudo apt update
+sudo apt install wireguard
+```
+
+### Step 2: Create keypairs
+
+**Private key**
+```linuxCmd showLineNumbers
+wg genkey | sudo tee /etc/wireguard/private.key
+sudo chmod go= /etc/wireguard/private.key
+```
+
+**Public key**
+```linuxCmd showLineNumbers
+sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
+```
+
+Make note of both your private key and your public key for **each** host. You will have four keys total.
+
+### Step 3: Configure WireGuard
+
+Create configuration files on both hosts
+
+```linuxCmd showLineNumbers
+sudo nano /etc/wireguard/wg0.conf
+```
+
+**VPS Proxy:**
+```ini title="/etc/wireguard/wg0.conf"
+[Interface]
+PrivateKey = <VPS proxy private key>
+Address = 10.8.0.1/24
+ListenPort = 51820
+
+[Peer]
+# Minecraft Host
+PublicKey = <Minecraft host public key>
+AllowedIPs = 10.8.0.2/32
+```
+
+**Minecraft Host:**
+```ini title="/etc/wireguard/wg0.conf"
+[Interface]
+PrivateKey = <Minecraft host private key>
+Address = 10.8.0.2/24
+
+[Peer]
+# VPS Proxy
+PublicKey = <VPS proxy public key>
+Endpoint = <proxy IP>:51820
+AllowedIPs = 10.8.0.1/32
+PersistentKeepalive = 25
+```
+
+Because the VPS is the side that initializes the VPN connection, this setup works even if your Minecraft host is behind CGNAT.
+
+### Step 4: Enable WireGuard on each host
+
+On both the proxy and Minecraft host, start the WireGuard service.
+
+```linuxCmd showLineNumbers
+sudo systemctl enable wg-quick@wg0.service
+sudo systemctl start wg-quick@wg0.service
+```
+
+### Step 5: Configure Velocity
+
+In the Velocity proxy config, just change your home IP to your Minecraft server host's WireGuard IP.
+
+```toml title="velocity.toml"
+[servers]
+# Configure your servers here. Each key represents the server's name, and the value
+# represents the IP address of the server to connect to.
+main = "10.8.0.2:25567"
+```
+
+### Step 6: Clean up
+
+If you were port fowarding before, there's no need anymore with the VPN method. WireGuard provides a tunnel directly from your proxy host to your Minecraft server host.
+
+
 
 ## Alternatives
 
